@@ -11,10 +11,10 @@ const MC_PORT = parseInt(process.env.MC_PORT);
 const MC_VERSION = process.env.MC_VERSION;
 
 app.get("/", (req, res) => {
-  res.send("☕ Chai Wale Wake Service Running");
+  res.send("☕ Wake Service Running");
 });
 
-app.post("/wake", async (req, res) => {
+app.post("/wake", (req, res) => {
 
   const auth = req.headers.authorization;
 
@@ -40,14 +40,13 @@ app.post("/wake", async (req, res) => {
       console.log("Wake error:", err.message);
     });
 
-    res.json({ success: true, message: "Wake attempt sent" });
+    res.json({ success: true });
 
   } catch (err) {
     res.status(500).json({ error: "Wake failed" });
   }
-
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Wake Service running on port ${PORT}`);
+  console.log(`🚀 Wake Service running on ${PORT}`);
 });
